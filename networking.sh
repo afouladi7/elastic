@@ -1,0 +1,1 @@
+oc get secret kibana-openshift-tls -n elastic-monitoring -oyaml | grep tls.crt | cut -b 12- | base64 -d > tls.crt; oc get secret kibana-openshift-tls -n elastic-monitoring -oyaml | grep tls.key | cut -b 12- | base64 -d > tls.key; oc create route reencrypt --service kibana-kb-http --cert tls.crt --key tls.key -n elastic-monitoring
